@@ -5,7 +5,7 @@ import { useState } from "react"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import api from "@/services/api"
-import contactEditSchema from "@/schemas/contactSchema"
+import contactEditSchema from "@/schemas/contactEditSchema"
 
 const ModalEditContact = ({contactId, token, setContacts}: IContactIdProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()

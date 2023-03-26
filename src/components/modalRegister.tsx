@@ -21,8 +21,9 @@ import { useState } from "react"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import { IUserRegister } from "@/types"
-import registerSchema from "@/schemas/registerSchema"
 import api from "@/services/api"
+import registerSchema from "@/schemas/registerUserSchema"
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 
 const ModalRegister = () => {
   const { isOpen, onOpen, onClose} = useDisclosure()
@@ -30,6 +31,7 @@ const ModalRegister = () => {
   const [inputPhone, setInputPhone] = useState("")
   const [inputEmail, setInputEmail] = useState("")
   const [inputPassword, setInputPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
 
   const nameError = inputName === ""
   const phoneError = inputPhone === ""
@@ -126,7 +128,12 @@ const ModalRegister = () => {
             <FormControl id="password" isRequired isInvalid={passwordError}>
                     <FormLabel>Senha</FormLabel>
                     <InputGroup>
-                        <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type="password" {...register("password")} onChange={(e) => setInputPassword(e.target.value)}/>
+                        <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type={showPassword ? 'text' : 'password'} {...register("password")} onChange={(e) => setInputPassword(e.target.value)}/>
+                        <InputRightElement>
+                          <Button onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                            {showPassword ? <ViewIcon/> : <ViewOffIcon/>}
+                          </Button>
+                        </InputRightElement>
                     </InputGroup>
                     {!passwordError ? (
                         <FormHelperText>  

@@ -1,4 +1,4 @@
-import contactSchema from "@/schemas/contactSchema";
+import contactSchema from "@/schemas/contactEditSchema";
 import api from "@/services/api";
 import { IContactIdProps, ICreateContact } from "@/types";
 import { AddIcon } from "@chakra-ui/icons";

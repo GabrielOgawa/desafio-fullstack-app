@@ -60,3 +60,21 @@ export interface ICreateContact {
   email: string;
   phone: string;
 }
+
+export interface IUserProps {
+  userId: string;
+  token: string;
+  user: IUserResponse;
+}
+
+export interface IEditUser {
+  name?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+}
+
+export interface IModalEditProps {
+  userId: string;
+  token: string;
+}
