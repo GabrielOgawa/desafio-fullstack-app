@@ -8,3 +8,10 @@ export interface IUserLogin {
 export interface IProviderProps {
   children: ReactNode
 }
+
+export interface IUserRegister {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+}
