@@ -9,6 +9,9 @@ const HeaderDashboard = ({userName}: IDashProps) => {
     destroyCookie(null, "desafio.token")
     router.push("/")
   }
+  const edit = () => {
+    router.push("/user")
+  }
   return (
     <Box>
       <Flex justifyContent={"space-between"}>
@@ -18,7 +21,7 @@ const HeaderDashboard = ({userName}: IDashProps) => {
             <Text>{userName}</Text>
           </MenuButton>
           <MenuList>
-            <MenuItem>Editar Perfil</MenuItem>
+            <MenuItem onClick={() => edit()}>Editar Perfil</MenuItem>
             <MenuItem onClick={() => logout()}>Sair</MenuItem>
           </MenuList>
         </Menu>
