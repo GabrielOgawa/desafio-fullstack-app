@@ -18,6 +18,8 @@ export const AuthProvider = ({children}: IProviderProps) => {
     api.post("/login", data)
     .then((res) => {
       setCookie(null, "desafio.token", res.data.token, {maxAge: 60 * 60, path: "/"})
+      setCookie(null, "desafio.userName", res.data.userName, {maxAge: 60 * 60, path: "/"})
+      setCookie(null, "desafio.userId", res.data.userId, {maxAge: 60 * 60, path: "/"})
       toast({
         title: "sucess",
         position: "top-right",
