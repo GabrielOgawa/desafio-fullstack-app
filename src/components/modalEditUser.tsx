@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Box,
   useToast,
+  Flex,
 } from "@chakra-ui/react"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -94,7 +95,7 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
 
     return (
       <>
-      <Button cursor={"pointer"} onClick={onOpen}>
+      <Button cursor={"pointer"} onClick={onOpen} variant={"modalAdd"}>
         <EditIcon/>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -155,10 +156,10 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
         </ModalBody>
 
         <ModalFooter>
-        <Box>
-          <Button onClick={handleSubmit(onFormSubmit)}>Alterar</Button>
-          <Button onClick={onClose}>Cancelar</Button>
-        </Box>
+        <Flex gap={2}>
+          <Button onClick={handleSubmit(onFormSubmit)} variant={"default"}>Alterar</Button>
+          <Button onClick={onClose} variant={"cancel"}>Cancelar</Button>
+        </Flex>
         </ModalFooter>
 
       </ModalContent>

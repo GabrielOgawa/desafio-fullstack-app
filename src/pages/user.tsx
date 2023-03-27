@@ -1,22 +1,28 @@
+import HeaderDashboard from "@/components/Dashboard/headerDashboard"
 import ModalEditUser from "@/components/modalEditUser"
 import api from "@/services/api"
 import { IUserProps, IUserResponse } from "@/types"
-import { Box, List, ListItem, Text } from "@chakra-ui/react"
+import { Box, Flex, List, ListItem, Text } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import nookies from "nookies"
 
 const User = ({token, userId, user}: IUserProps) => {
   return (
     <>
-      <Box>
-        <Text>Seus Dados</Text>
-        <List>
-          <ListItem>{user.name}</ListItem>
-          <ListItem>{user.email}</ListItem>
-          <ListItem>{user.phone}</ListItem>
+      <HeaderDashboard userName={user.name}/>
+      <Box padding={"10"}>
+        <Flex gap={2}>
+          <Text fontSize={"2xl"} fontWeight={"bold"}>Seus Dados</Text>
+          <ModalEditUser token={token} userId={userId}/>
+        </Flex>
+        <List marginTop={"20px"}>
+          <Flex flexDirection={"column"} gap={2}>
+            <ListItem fontSize={"xl"}>Nome: {user.name}</ListItem>
+            <ListItem fontSize={"xl"}>Email: {user.email}</ListItem>
+            <ListItem fontSize={"xl"}>Telefone: {user.phone}</ListItem>
+          </Flex>
         </List>
       </Box>
-      <ModalEditUser token={token} userId={userId}/>
     </>
   )
 }

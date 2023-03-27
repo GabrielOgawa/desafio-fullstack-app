@@ -19,28 +19,20 @@ const BodyDashboard = ({token}: IDashProps) => {
   }, [])
  
   return (
-    <>
+    <Flex maxWidth={"800px"} flexDirection={"column"} margin={"0 auto"} gap={10} marginTop={"50px"} p={"10px"}>
     <Box>
-      <Flex>
+      <Flex gap={2}>
         <Text fontSize={25} fontWeight={"bold"}>Contatos</Text>
         <ModalAddContact token={token} setContacts={setContacts}/>
       </Flex>
     </Box>
-    <List>
-      <ListItem>
-        <Flex justifyContent={'space-between'}>
-          <Text>Nome</Text>
-          <Text>Email</Text>
-          <Text>Telefone</Text>
-          <Text></Text>
-        </Flex>
-      </ListItem>
+    <List bg={"gray.200"} border={"1px solid transparent"} borderRadius={"5px"}>
       {
         contacts.map((contact) => {
           return (
-            <ListItem key={contact.id}>
-              <Flex justifyContent={'space-between'}>
-                <Text>{contact.name}</Text>
+            <ListItem key={contact.id} padding={"10px"}>
+              <Flex justifyContent={"space-between"} alignItems={"center"}>
+                <Text fontWeight={"bold"}>{contact.name}</Text>
                 <Text>{contact.email}</Text>
                 <Text>{contact.phone}</Text>
                 <Box>
@@ -53,7 +45,7 @@ const BodyDashboard = ({token}: IDashProps) => {
         })
       }
     </List>
-    </>
+    </Flex>
   )
 }
 

@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -47,7 +48,7 @@ const ModalLogin = () => {
 
   return(
     <>
-      <Button onClick={onOpen}>Login</Button>
+      <Button onClick={onOpen} variant={"default"} fontSize={"lg"}>Login</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -92,25 +93,18 @@ const ModalLogin = () => {
           </FormControl>
           </ModalBody>
           <ModalFooter>
-                <Button
-                  size="lg"
-                  variant={"default"}
-                  onClick={handleSubmit(onFormSubmit)}
-                  _hover={{
-                    bg: 'blue.500',
-                    fontWeight: "bold"
-                  }}>
-                    Entrar
-                </Button>
-                <Button
-                size="lg"
-                _hover={{
-                  bg: 'red.600',
-                  fontWeight: "bold"
-                }}
-                onClick={onClose}>
-                    Cancel
-                </Button>
+                <Flex w={"100%"} justifyContent={"flex-end"} gap={2} >
+                  <Button
+                    variant={"default"}
+                    onClick={handleSubmit(onFormSubmit)}>
+                      Entrar
+                  </Button>
+                  <Button
+                  variant={"cancel"}
+                  onClick={onClose}>
+                      Cancel
+                  </Button>
+                </Flex>
             </ModalFooter>
         </ModalContent>
       </Modal>
