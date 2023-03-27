@@ -14,15 +14,15 @@ const HeaderDashboard = ({userName}: IDashProps) => {
   }
   return (
     <Box>
-      <Flex justifyContent={"space-between"}>
-        <Text fontWeight={"bold"} fontSize={22} color={"black"}>Dashboard</Text>
+      <Flex justifyContent={"space-between"} padding={"10"} alignItems={"center"} bg={"cyan.500"} height={"8vh"}>
+        <Text fontWeight={"bold"} fontSize={22} color={"black"}>My Contacts</Text>
         <Menu>
-          <MenuButton as={Button} cursor={"pointer"}>
+          <MenuButton as={Button} cursor={"pointer"} variant={"default"}>
             <Text>{userName}</Text>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => edit()}>Editar Perfil</MenuItem>
-            <MenuItem onClick={() => logout()}>Sair</MenuItem>
+            <MenuItem onClick={() => edit()} fontWeight={"bold"}>Editar Perfil</MenuItem>
+            <MenuItem onClick={() => logout()} fontWeight={"bold"}>Sair</MenuItem>
           </MenuList>
         </Menu>
       </Flex>

@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -79,7 +80,7 @@ const ModalRegister = () => {
 }
   return(
     <>
-      <Button onClick={onOpen}>Registro</Button>
+      <Button onClick={onOpen} variant={"default"} fontSize={"lg"}>Registro</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -147,25 +148,17 @@ const ModalRegister = () => {
           </FormControl>
           </ModalBody>
           <ModalFooter>
-                <Button
-                  size="lg"
-                  variant={"default"}
-                  onClick={handleSubmit(onFormSubmit)}
-                  _hover={{
-                    bg: 'blue.500',
-                    fontWeight: "bold"
-                  }}>
-                    Criar
-                </Button>
-                <Button
-                size="lg"
-                _hover={{
-                  bg: 'red.600',
-                  fontWeight: "bold"
-                }}
-                onClick={onClose}>
-                    Cancel
-                </Button>
+                <Flex justifyContent={"flex-end"} gap={2}>
+                  <Button
+                    variant={"default"}>
+                      Criar
+                  </Button>
+                  <Button
+                  variant={"cancel"}
+                  onClick={onClose}>
+                      Cancel
+                  </Button>
+                </Flex>
             </ModalFooter>
         </ModalContent>
       </Modal>

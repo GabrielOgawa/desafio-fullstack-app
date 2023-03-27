@@ -1,12 +1,11 @@
-import ModalLogin from "@/components/modalLogin";
-import ModalRegister from "@/components/modalRegister";
+import BodyHomePage from "@/components/bodyHomePage";
+import HeaderHomePage from "@/components/headerHomePage";
 
 export default function Home() {
   return (
     <>
-      <h1>Home</h1>
-      <ModalLogin/>
-      <ModalRegister/>
+      <HeaderHomePage/>
+      <BodyHomePage/>
     </>
   )
 }

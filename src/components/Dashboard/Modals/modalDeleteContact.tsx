@@ -1,7 +1,7 @@
 import api from "@/services/api";
 import { IContactIdProps } from "@/types";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Box, Button, Modal, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
 
 const ModalDeleteContact = ({contactId, token, setContacts}: IContactIdProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()
@@ -46,17 +46,19 @@ const ModalDeleteContact = ({contactId, token, setContacts}: IContactIdProps) =>
 
   return (
     <>
-    <Button cursor={"pointer"} onClick={onOpen}>
+    <Button cursor={"pointer"} onClick={onOpen} variant={"modalAdd"} >
       <DeleteIcon/>
     </Button>
     <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
     <ModalContent>
       <ModalHeader>Tem certeza que quer excluir o contato?</ModalHeader>
-      <Box>
-        <Button onClick={() => deleteContact()}>Excluir</Button>
-        <Button onClick={onClose}>Cancelar</Button>
-      </Box>
+      <ModalBody>
+        <Flex justifyContent={"center"} gap={5}>
+          <Button onClick={() => deleteContact()} variant={"default"}>Excluir</Button>
+          <Button onClick={onClose} variant={"cancel"}>Cancelar</Button>
+        </Flex>
+      </ModalBody>
     </ModalContent>
     </Modal>
     </>
