@@ -57,15 +57,7 @@ const ModalLogin = () => {
             <FormControl id="email" isRequired isInvalid={emailError}>
               <FormLabel>E-mail</FormLabel>
               <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type="email" {...register("email")} onChange={(e) => setInputEmail(e.target.value)}/>
-              {!emailError ? (
-                  <FormHelperText>  
-                  Digite seu e-mail
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.email?.message}
-                  </FormErrorMessage>
-              )}
+              <span>{errors.email?.message}</span>
             </FormControl>
             <FormControl id="password" isRequired isInvalid={passwordError}>
                     <FormLabel>Senha</FormLabel>
@@ -81,15 +73,7 @@ const ModalLogin = () => {
                             </Button>
                         </InputRightElement>
                     </InputGroup>
-                    {!passwordError ? (
-                        <FormHelperText>  
-                        Digite sua senha
-                        </FormHelperText>
-                    ) : (
-                        <FormErrorMessage>
-                        {errors.password?.message}
-                        </FormErrorMessage>
-                    )}
+                    <span>{errors.password?.message}</span>
           </FormControl>
           </ModalBody>
           <ModalFooter>

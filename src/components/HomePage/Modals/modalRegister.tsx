@@ -63,8 +63,10 @@ const ModalRegister = () => {
           </Box>
         ),
       })
+      onClose()
     })
     .catch((err) => {
+      console.log(err)
       toast({
         title: 'error',
         position: 'top-right',
@@ -89,42 +91,17 @@ const ModalRegister = () => {
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel>Nome</FormLabel>
               <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type="text" {...register("name")} onChange={(e) => setInputName(e.target.value)}/>
-              {!nameError ? (
-                  <FormHelperText>  
-                  Digite seu e-mail
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.name?.message}
-                  </FormErrorMessage>
-              )}
-            </FormControl>
-
+              <span>{errors.name?.message}</span>
+              </FormControl>
             <FormControl id="phone" isRequired isInvalid={phoneError}>
               <FormLabel>Telefone</FormLabel>
               <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type="text" {...register("phone")} onChange={(e) => setInputPhone(e.target.value)}/>
-              {!phoneError ? (
-                  <FormHelperText>  
-                  Digite seu e-mail
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.phone?.message}
-                  </FormErrorMessage>
-              )}
+              <span>{errors.phone?.message}</span>
             </FormControl>
             <FormControl id="email" isRequired isInvalid={emailError}>
               <FormLabel>E-mail</FormLabel>
               <Input required focusBorderColor="blue.300" errorBorderColor='red.300' type="email" {...register("email")} onChange={(e) => setInputEmail(e.target.value)}/>
-              {!emailError ? (
-                  <FormHelperText>  
-                  Digite seu e-mail
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.email?.message}
-                  </FormErrorMessage>
-              )}
+              <span>{errors.email?.message}</span>
             </FormControl>
             <FormControl id="password" isRequired isInvalid={passwordError}>
                     <FormLabel>Senha</FormLabel>
@@ -136,21 +113,14 @@ const ModalRegister = () => {
                           </Button>
                         </InputRightElement>
                     </InputGroup>
-                    {!passwordError ? (
-                        <FormHelperText>  
-                        Digite sua senha
-                        </FormHelperText>
-                    ) : (
-                        <FormErrorMessage>
-                        {errors.password?.message}
-                        </FormErrorMessage>
-                    )}
+                    <span>{errors.password?.message}</span>
           </FormControl>
           </ModalBody>
           <ModalFooter>
                 <Flex justifyContent={"flex-end"} gap={2}>
                   <Button
-                    variant={"default"}>
+                    variant={"default"}
+                    onClick={handleSubmit(onFormSubmit)}>
                       Criar
                   </Button>
                   <Button

@@ -28,48 +28,63 @@ const ModalEditContact = ({contactId, token, setContacts}: IContactIdProps) => {
   const onFormSubmit = async (formData:IEditContact) => {
       const {email, name, phone} = formData
       const contactData: IEditContact = {}
-      if (email !== "") {
-        contactData.email = email
-      }
-      if (name !== "") {
-        contactData.name = name
-      }
-      if (phone !== "") {
-        contactData.phone = phone
-      }
-      try {
-        api.defaults.headers.authorization = `Bearer ${token}`
-        api.patch(`/contacts/${contactId}`, contactData)
-        toast({
-          title: "sucess",
-          position: "top-right",
-          isClosable: true,
-          duration: 2000,
-          render: () => (
-            <Box color={'gray.50'} p={3} bg={'green.600'} fontWeight={'bold'} borderRadius={'md'}>
-              Contato alterado com sucesso!
-            </Box>
-          ),
-        })
-        } catch (err){
-          toast({
-            title: 'error',
-            position: 'top-right',
-            isClosable: true,
-            duration: 3000,
-            render: () => (
-                <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
-                  Erro ao alterar o contato, tente novamente
-                </Box>
-              ),
-        })
-          console.log(err)
-        } finally {
-          api.defaults.headers.authorization = `Bearer ${token}`
-          const contacts = await api.get("/contacts")
-          setContacts(contacts.data)
-          onClose()
+      if (email !== "" || name !== "" || phone !== "") {
+        if (email !== "") {
+          contactData.email = email
         }
+        if (name !== "") {
+          contactData.name = name
+        }
+        if (phone !== "") {
+          contactData.phone = phone
+        }
+        try {
+          api.defaults.headers.authorization = `Bearer ${token}`
+          api.patch(`/contacts/${contactId}`, contactData)
+          toast({
+            title: "sucess",
+            position: "top-right",
+            isClosable: true,
+            duration: 2000,
+            render: () => (
+              <Box color={'gray.50'} p={3} bg={'green.600'} fontWeight={'bold'} borderRadius={'md'}>
+                Contato alterado com sucesso!
+              </Box>
+            ),
+          })
+          } catch (err){
+            toast({
+              title: 'error',
+              position: 'top-right',
+              isClosable: true,
+              duration: 3000,
+              render: () => (
+                  <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
+                    Erro ao alterar o contato, tente novamente
+                  </Box>
+                ),
+          })
+            console.log(err)
+          } finally {
+            api.defaults.headers.authorization = `Bearer ${token}`
+            const contacts = await api.get("/contacts")
+            setContacts(contacts.data)
+            onClose()
+          }
+      }
+      if (email === "" && name === "" && phone === "") {
+        toast({
+          title: 'error',
+          position: 'top-right',
+          isClosable: true,
+          duration: 3000,
+          render: () => (
+              <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
+                Insira os dados do contato para altera-lo
+              </Box>
+            ),
+      })
+      }
   }
 
   return (
@@ -88,15 +103,7 @@ const ModalEditContact = ({contactId, token, setContacts}: IContactIdProps) => {
       <FormControl id="email">
         <FormLabel>E-mail</FormLabel>
         <Input focusBorderColor="blue.300" type="email" {...register("email")} onChange={(e) => setInputEmail(e.target.value)}/>
-        {!emailError ? (
-                  <FormHelperText>  
-                  Digite um e-mail válido
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.email?.message}
-                  </FormErrorMessage>
-              )}
+        <span>{errors.email?.message}</span>
       </FormControl>
 
       <FormControl>

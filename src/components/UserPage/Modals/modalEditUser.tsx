@@ -49,48 +49,63 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
     const onFormSubmit = (formData:IEditUser) => {
       const {email, name, phone, password} = formData
       const userData: IEditUser = {}
-      if (email !== "") {
-        userData.email = email
-      }
-      if (name !== "") {
-        userData.name = name
-      }
-      if (phone !== "") {
-        userData.phone = phone
-      }
-      if (password !== "") {
-        userData.password = password
-      }
-      try {
-        api.defaults.headers.authorization = `Bearer ${token}`
-        api.patch(`/users/${userId}`, userData)
-        toast({
-          title: "sucess",
-          position: "top-right",
-          isClosable: true,
-          duration: 2000,
-          render: () => (
-            <Box color={'gray.50'} p={3} bg={'green.600'} fontWeight={'bold'} borderRadius={'md'}>
-              Contato alterado com sucesso!
-            </Box>
-          ),
-        })
-        } catch (err){
-          toast({
-            title: 'error',
-            position: 'top-right',
-            isClosable: true,
-            duration: 3000,
-            render: () => (
-                <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
-                  Erro ao alterar o contato, tente novamente
-                </Box>
-              ),
-        })
-          console.log(err)
-        } finally {
-          onClose()
+      if (email !== "" || name !== "" || phone !== "" || password !== "") {
+        if (email !== "") {
+          userData.email = email
         }
+        if (name !== "") {
+          userData.name = name
+        }
+        if (phone !== "") {
+          userData.phone = phone
+        }
+        if (password !== "") {
+          userData.password = password
+        }
+        try {
+          api.defaults.headers.authorization = `Bearer ${token}`
+          api.patch(`/users/${userId}`, userData)
+          toast({
+            title: "sucess",
+            position: "top-right",
+            isClosable: true,
+            duration: 2000,
+            render: () => (
+              <Box color={'gray.50'} p={3} bg={'green.600'} fontWeight={'bold'} borderRadius={'md'}>
+                Contato alterado com sucesso!
+              </Box>
+            ),
+          })
+          } catch (err){
+            toast({
+              title: 'error',
+              position: 'top-right',
+              isClosable: true,
+              duration: 3000,
+              render: () => (
+                  <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
+                    Erro ao alterar o contato, tente novamente
+                  </Box>
+                ),
+          })
+            console.log(err)
+          } finally {
+            onClose()
+          }
+      }
+      if (email === "" && name === "" && phone === "" && password === "") {
+        toast({
+          title: 'error',
+          position: 'top-right',
+          isClosable: true,
+          duration: 3000,
+          render: () => (
+              <Box color={'gray.50'} p={3} bg={'red.600'} fontWeight={'bold'} borderRadius={'md'}>
+                Insira os dados para alterar
+              </Box>
+            ),
+      })
+      }
     }
 
     return (
@@ -109,15 +124,7 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
         <FormControl id="email">
           <FormLabel>E-mail</FormLabel>
           <Input focusBorderColor="blue.300" type="email" {...register("email")} onChange={(e) => setInputEmail(e.target.value)}/>
-          {!emailError ? (
-                    <FormHelperText>  
-                    Digite um e-mail válido
-                    </FormHelperText>
-                ) : (
-                    <FormErrorMessage>
-                        {errors.email?.message}
-                    </FormErrorMessage>
-                )}
+          <span>{errors.email?.message}</span>
         </FormControl>
 
         <FormControl>
@@ -142,15 +149,7 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
                           </Button>
                         </InputRightElement>
                     </InputGroup>
-                    {!passwordError ? (
-                        <FormHelperText>  
-                        Digite sua senha
-                        </FormHelperText>
-                    ) : (
-                        <FormErrorMessage>
-                        {errors.password?.message}
-                        </FormErrorMessage>
-                    )}
+                    <span>{errors.password?.message}</span>
           </FormControl>
 
         </ModalBody>

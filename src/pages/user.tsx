@@ -1,12 +1,18 @@
 import HeaderDashboard from "@/components/Dashboard/headerDashboard"
-import ModalEditUser from "@/components/modalEditUser"
+import ModalDeleteUser from "@/components/UserPage/Modals/modalDeleteUser"
+import ModalEditUser from "@/components/UserPage/Modals/modalEditUser"
 import api from "@/services/api"
 import { IUserProps, IUserResponse } from "@/types"
-import { Box, Flex, List, ListItem, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, List, ListItem, Text } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
+import { useRouter } from "next/router"
 import nookies from "nookies"
 
 const User = ({token, userId, user}: IUserProps) => {
+  const router = useRouter()
+  const backPage = () => {
+    router.push("/dashboard")
+  }
   return (
     <>
       <HeaderDashboard userName={user.name}/>
@@ -14,6 +20,7 @@ const User = ({token, userId, user}: IUserProps) => {
         <Flex gap={2}>
           <Text fontSize={"2xl"} fontWeight={"bold"}>Seus Dados</Text>
           <ModalEditUser token={token} userId={userId}/>
+          <ModalDeleteUser token={token} userId={userId}/>
         </Flex>
         <List marginTop={"20px"}>
           <Flex flexDirection={"column"} gap={2}>
@@ -22,6 +29,7 @@ const User = ({token, userId, user}: IUserProps) => {
             <ListItem fontSize={"xl"}>Telefone: {user.phone}</ListItem>
           </Flex>
         </List>
+        <Button marginTop={"30px"} variant={"default"} onClick={() => backPage()}>Voltar para Página Principal</Button>
       </Box>
     </>
   )
