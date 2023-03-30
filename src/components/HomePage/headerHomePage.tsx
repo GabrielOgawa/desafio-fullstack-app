@@ -1,5 +1,5 @@
-import ModalLogin from "@/components/modalLogin";
-import ModalRegister from "@/components/modalRegister";
+import ModalLogin from "@/components/HomePage/Modals/modalLogin";
+import ModalRegister from "@/components/HomePage/Modals/modalRegister";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 

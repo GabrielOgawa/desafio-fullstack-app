@@ -1,4 +1,4 @@
-import contactSchema from "@/schemas/contactEditSchema";
+import contactSchema from "@/schemas/contactSchema";
 import api from "@/services/api";
 import { IContactIdProps, ICreateContact } from "@/types";
 import { AddIcon } from "@chakra-ui/icons";
@@ -78,15 +78,7 @@ const ModalAddContact = ({token, setContacts}: IContactIdProps) => {
       <FormControl id="email" isRequired isInvalid={emailError}>
         <FormLabel>E-mail</FormLabel>
         <Input required focusBorderColor="blue.300" type="email" errorBorderColor='red.300' {...register("email")} onChange={(e) => setInputEmail(e.target.value)}/>
-        {!emailError ? (
-                  <FormHelperText>  
-                  Digite um e-mail válido
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.email?.message}
-                  </FormErrorMessage>
-              )}
+        <span>{errors.email?.message}</span>
       </FormControl>
 
       <FormControl>
@@ -94,29 +86,13 @@ const ModalAddContact = ({token, setContacts}: IContactIdProps) => {
         <FormLabel>Nome</FormLabel>
         <Input required focusBorderColor="blue.300" type="text" errorBorderColor='red.300' {...register("name")} onChange={(e) => setInputName(e.target.value)}/>
         </FormControl>
-        {!nameError ? (
-                  <FormHelperText>  
-                  Digite um nome
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.name?.message}
-                  </FormErrorMessage>
-              )}
+        <span>{errors.name?.message}</span>
       </FormControl>
 
       <FormControl id="phone" isRequired isInvalid={phoneError}>
         <FormLabel>Telefone</FormLabel>
         <Input required focusBorderColor="blue.300" type="text" errorBorderColor='red.300' {...register("phone")} onChange={(e) => setInputPhone(e.target.value)}/>
-        {!phoneError ? (
-                  <FormHelperText>  
-                  Digite um telefone
-                  </FormHelperText>
-              ) : (
-                  <FormErrorMessage>
-                      {errors.phone?.message}
-                  </FormErrorMessage>
-              )}
+        <span>{errors.phone?.message}</span>
       </FormControl>
 
       </ModalBody>
