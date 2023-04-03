@@ -4,7 +4,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
 
-const ModalDeleteUser = ({token, userId}: IModalEditProps) => {
+const ModalDeleteUser = ({token, userId, setUserFake}: IModalEditProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()
   const toast = useToast()
   const router = useRouter()
@@ -39,6 +39,7 @@ const ModalDeleteUser = ({token, userId}: IModalEditProps) => {
     })
       console.log(err)
     } finally {
+      setUserFake((fakeUser) => !fakeUser)
       onClose()
     }
 

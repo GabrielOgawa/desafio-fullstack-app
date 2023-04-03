@@ -26,7 +26,7 @@ import { IEditUser, IModalEditProps } from "@/types"
 import editUserSchema from "@/schemas/editUserSchema"
 import api from "@/services/api"
 
-const ModalEditUser = ({token, userId}: IModalEditProps) => {
+const ModalEditUser = ({token, userId, setUserFake}: IModalEditProps) => {
   const toast = useToast()
   const { isOpen, onOpen, onClose} = useDisclosure()
   const [inputEmail, setInputEmail] = useState("")
@@ -90,6 +90,7 @@ const ModalEditUser = ({token, userId}: IModalEditProps) => {
           })
             console.log(err)
           } finally {
+            setUserFake((fakeUser) => !fakeUser)
             onClose()
           }
       }

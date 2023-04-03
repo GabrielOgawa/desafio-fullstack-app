@@ -1,9 +1,23 @@
 import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
 import { destroyCookie } from "nookies"
 import { useRouter } from 'next/router';
-import { IDashProps } from "@/types";
+import { useEffect, useState } from "react";
+import api from "@/services/api"
+import { IDashboardProps, IUserResponse } from "@/types";
+import { useAuth } from "@/contexts/authContext"
 
-const HeaderDashboard = ({userName}: IDashProps) => {
+const HeaderDashboard = ({token, userId}: IDashboardProps) => {
+  const {userFake, setUserInfo, userInfo} = useAuth()
+
+  useEffect(() => {
+    const response = async () => {
+      api.defaults.headers.authorization = `Bearer ${token}`
+      const res = await api.get(`/users/${userId}`)
+      const userData: IUserResponse = res.data
+      setUserInfo(userData)
+    }
+    response()
+  }, [userFake])
   const router = useRouter()
   const logout = () => {
     destroyCookie(null, "desafio.token")
@@ -18,7 +32,7 @@ const HeaderDashboard = ({userName}: IDashProps) => {
         <Text fontWeight={"bold"} fontSize={22} color={"black"}>My Contacts</Text>
         <Menu>
           <MenuButton as={Button} cursor={"pointer"} variant={"default"}>
-            <Text>{userName}</Text>
+            <Text>{userInfo.name}</Text>
           </MenuButton>
           <MenuList>
             <MenuItem onClick={() => edit()} fontWeight={"bold"}>Editar Perfil</MenuItem>

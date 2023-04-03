@@ -7,7 +7,7 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import api from "@/services/api"
 import contactEditSchema from "@/schemas/contactEditSchema"
 
-const ModalEditContact = ({contactId, token, setContacts}: IContactIdProps) => {
+const ModalEditContact = ({contactId, token, setFakeContacts}: IContactIdProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()
   const toast = useToast()
 
@@ -66,9 +66,7 @@ const ModalEditContact = ({contactId, token, setContacts}: IContactIdProps) => {
           })
             console.log(err)
           } finally {
-            api.defaults.headers.authorization = `Bearer ${token}`
-            const contacts = await api.get("/contacts")
-            setContacts(contacts.data)
+            setFakeContacts((fakeContacts) => !fakeContacts)
             onClose()
           }
       }
