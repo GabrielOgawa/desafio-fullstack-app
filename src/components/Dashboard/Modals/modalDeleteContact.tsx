@@ -3,7 +3,7 @@ import { IContactIdProps } from "@/types";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
 
-const ModalDeleteContact = ({contactId, token, setContacts}: IContactIdProps) => {
+const ModalDeleteContact = ({contactId, token, setFakeContacts}: IContactIdProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()
   const toast = useToast()
 
@@ -36,9 +36,7 @@ const ModalDeleteContact = ({contactId, token, setContacts}: IContactIdProps) =>
     })
       console.log(err)
     } finally {
-      api.defaults.headers.authorization = `Bearer ${token}`
-      const contacts = await api.get("/contacts")
-      setContacts(contacts.data)
+      setFakeContacts((fakeContacts) => !fakeContacts)
       onClose()
     }
 

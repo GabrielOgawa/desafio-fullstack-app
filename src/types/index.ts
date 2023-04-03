@@ -25,9 +25,13 @@ export interface IUserResponse {
   createdAt: Date;
 }
 
-export interface IDashProps {
-  userName?: string;
-  token?: string;
+export interface IDash {
+  token: string;
+}
+
+export interface IDashboardProps {
+  token: string;
+  userId: number;
 }
 
 export interface IHeaderDashProps {
@@ -46,7 +50,7 @@ export interface IContacts {
 export interface IContactIdProps {
   contactId?: number;
   token?: string;
-  setContacts: Dispatch<SetStateAction<[] | IContacts[]>>
+  setFakeContacts: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IEditContact {
@@ -64,7 +68,6 @@ export interface ICreateContact {
 export interface IUserProps {
   userId: string;
   token: string;
-  user: IUserResponse;
 }
 
 export interface IEditUser {
@@ -75,6 +78,7 @@ export interface IEditUser {
 }
 
 export interface IModalEditProps {
-  userId: string;
+  userId: number | undefined;
   token: string;
+  setUserFake: Dispatch<SetStateAction<boolean>>;
 }

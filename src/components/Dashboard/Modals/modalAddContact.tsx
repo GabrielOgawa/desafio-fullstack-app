@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import {useForm} from "react-hook-form"
 
-const ModalAddContact = ({token, setContacts}: IContactIdProps) => {
+const ModalAddContact = ({token, setFakeContacts}: IContactIdProps) => {
   const { isOpen, onOpen, onClose} = useDisclosure()
   const toast = useToast()
 
@@ -56,9 +56,7 @@ const ModalAddContact = ({token, setContacts}: IContactIdProps) => {
       })
         console.log(err)
       } finally {
-        api.defaults.headers.authorization = `Bearer ${token}`
-        const contacts = await api.get("/contacts")
-        setContacts(contacts.data)
+        setFakeContacts((fakeContacts) => !fakeContacts)
         onClose()
       }
   }
